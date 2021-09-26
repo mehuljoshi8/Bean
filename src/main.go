@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -13,20 +15,27 @@ type Session struct {
 	EndTime   string
 }
 
-type Shots struct {
+type FG struct {
 	Made      int
 	Attempted int
 }
 
 var idToSession map[int]Session
-var midrangeLeftCorner map[int]Shots
+var midrangeLeftCorner map[int]FG
 
-//todo: add a function here that parses the made/attempted string
-func parseString(str string) {
-
+/**
+ * The parseString function takes in a string str that
+ * is formatted via the made/attempted format and returns
+ * an FG struct storing the made/attempted data.
+ */
+func parseString(str string) FG {
+	res := strings.Split(str, "/")
+	m, _ := strconv.Atoi(res[0])
+	a, _ := strconv.Atoi(res[1])
+	return FG{m, a}
 }
 
-//todo: add a
+//todo: add a function that
 
 func main() {
 	//currently trying to get a minimal working product
@@ -44,7 +53,7 @@ func main() {
 		"free_throw"}
 
 	idToSession = make(map[int]Session)
-	midrangeLeftCorner = make(map[int]Shots)
+	midrangeLeftCorner = make(map[int]FG)
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Basketball Enters the Application Network (BEAN)")
@@ -55,7 +64,13 @@ func main() {
 			fmt.Print(s + ": ")
 			txt, _ := reader.ReadString('\n')
 			txt = strings.Replace(txt, "\n", "", -1)
-			parseString(txt)
+			matches, _ := regexp.MatchString("^[0-9]*/[0-9]*$", txt)
+			if matches {
+				parseString(txt)
+			} else {
+				fmt.Println("Please try to enter your string in the form of made/attempted")
+				os.Exit(0)
+			}
 		}
 	}
 }
