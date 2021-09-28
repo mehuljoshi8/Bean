@@ -25,6 +25,7 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
+// The signup function registers a new user into the database
 func signup(w http.ResponseWriter, r *http.Request) {
 	//Parse and decode the request body into a new Credentials instance
 	creds := &Credentials{}
@@ -41,7 +42,8 @@ func signup(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//todo: add a session based signin route with jwt-based-auth
+// The signin function logs in a user and sets the jwt token on the client side
+// which can be used to have protected routes in our server
 func signin(w http.ResponseWriter, r *http.Request) {
 	var creds Credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
@@ -98,4 +100,23 @@ func signin(w http.ResponseWriter, r *http.Request) {
 		Value:   tokenString,
 		Expires: experationTime,
 	})
+}
+
+func logout(w http.ResponseWriter, r *http.Request) {
+	c, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		} else {
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+	}
+
+	c.MaxAge = 0
+	c.Path = "/"
+	c.Value = ""
+	c.HttpOnly = true
+	http.SetCookie(w, c)
 }

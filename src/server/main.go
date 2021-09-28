@@ -14,6 +14,10 @@ func main() {
 	//auth_handlers
 	http.HandleFunc("/signup", signup)
 	http.HandleFunc("/signin", signin)
+	http.HandleFunc("/logout", logout)
+
+	//bean_handlers
+	http.HandleFunc("/welcome", welcome)
 
 	initDB()
 	log.Fatal(http.ListenAndServe(":8000", nil))
