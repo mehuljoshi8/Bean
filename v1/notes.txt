@@ -1,0 +1,23 @@
+April 12th, 2023
+
+The Roadmap:
+v1 - The database (CRUD) + terminal application
+v2 - Connecting Tkinter
+v3 - Computer Vision backend (analyze videos)
+v4 - CV meets Tkinter
+v5 - Migrating CV to API
+v6 - Migrating to iPhone application
+v7 - Connecting CV API to iphone applicaion
+
+Version 1.0 - Terminal application
+Current Commands: 
+1. quit or exit
+2. log (threes or mid) {date if None then today's date otherwise add it for that}
+3. plot (threes or mid) {show trends in all 5 graphs}
+
+
+May 1st, 2023
+I have a couple of complaints but overall I'm very happy with this project. It does exactly what I wanted it to do.
+But here are my compliaints: 
+1. The graphing is kind of cluttered. Moving it to an interactive version will overall beneifit me on the whole
+2. It would be nice to have a GUI but again the terminal application does enough for now.
