@@ -1,3 +1,3 @@
-# Bean: Basketball Enters the Application Network
+# BEAN (Basketball Enters the Application Network) v1
 
-###### A free aid to track your shooting stats
+## More documentation coming soon
