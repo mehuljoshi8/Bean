@@ -2,7 +2,6 @@
 Author: Mehul Joshi
 Version: 1.0
 '''
-
 import sqlite3
 import datetime
 import os
